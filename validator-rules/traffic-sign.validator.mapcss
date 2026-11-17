@@ -1,0 +1,20 @@
+meta {
+    title: "Traffic sign rules";
+    version: "0.0.1";
+    description: "Validator rules for traffic signs.";
+    author: "frfole";
+    link: "https://github.com/frfole/josm-customization";
+    min-josm-version: 19678;
+}
+
+node[highway=~/^(stop|give_way)$/][direction!~/^(forward|backward)$/] {
+    throwWarning: tr("missing tag - Traffic sign without direction tag");
+
+    assertNoMatch: "node highway=stop direction=forward";
+    assertNoMatch: "node highway=stop direction=backward";
+    assertNoMatch: "node highway=give_way direction=forward";
+    assertNoMatch: "node highway=give_way direction=backward";
+
+    assertMatch: "node highway=stop";
+    assertMatch: "node highway=give_way";
+}
